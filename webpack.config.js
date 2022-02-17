@@ -72,8 +72,8 @@ Encore
     //.autoProvidejQuery()
 
     .enablePostCssLoader((options) => {
-        options.config = {
-            path: './postcss.config.js'
+        options.postcssOptions = {
+            config: './postcss.config.js'
         }
     })
 ;

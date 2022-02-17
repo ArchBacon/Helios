@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Model\MessageModel;
 use App\Factory\MessageFactory;
 use App\Form\MessageType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MessageController extends AbstractController
 {
     #[Route('/message', name: 'message')]
-    public function index(Request $request): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $message = new MessageModel();
         $form = $this->createForm(MessageType::class, $message);
@@ -25,7 +26,8 @@ class MessageController extends AbstractController
         {
             $message = MessageFactory::create($form->getData());
 
-            // persist
+            $entityManager->persist($message);
+            $entityManager->flush();
 
             return $this->render('message/success.html.twig', [
                 'id' => $message->getId(),

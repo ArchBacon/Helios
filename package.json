@@ -16,8 +16,6 @@
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production --progress",
-        "dev-tailwind": "tailwindcss -i ./assets/styles/app.css -o ./public/build/app.css --watch",
-        "tailwind": "tailwindcss -i ./assets/styles/app.css -o ./public/build/app.css"
+        "build": "encore production --progress"
     }
 }

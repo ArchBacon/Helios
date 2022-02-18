@@ -21,6 +21,29 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
+    public function findAllCompanies(): array
+    {
+        return $this->createQueryBuilder('m')
+            ->select('m.company')
+            ->distinct()
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\NoResultException
+     */
+    public function findMessageCount(string $company): int
+    {
+        return $this->createQueryBuilder('m')
+            ->select('count(m.message)')
+            ->where('m.company = :company')
+            ->setParameter('company', $company)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     // /**
     //  * @return MessageModel[] Returns an array of MessageModel objects
     //  */

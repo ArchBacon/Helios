@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.tag {
+    color: rgb(244 114 182);
+}
+
+.attr {
+    color: rgb(203 213 225);
+}
+
+.attr-value {
+    color: rgb(125 211 252);
+}
+
+.char {
+    color: rgb(100 116 139);
+}

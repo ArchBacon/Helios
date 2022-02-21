@@ -30,7 +30,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/{company}', name: 'company')]
+    #[Route('/company/{company}', name: 'company')]
     public function view(string $company, MessageRepository $repository): Response
     {
         $messages = $repository->findMessagesByCompany($company);

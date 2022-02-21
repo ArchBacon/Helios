@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="fixed top-0 right-0 h-12 bg-zinc-600 w-full shadow-lg flex items-center px-12">
+        {% include 'shared/breadcrumb.html.twig' with {
+            'page_name': 'Generate embed',
+        } only %}
+    </div>
+
+    <button id="message" class="h-12 w-12 bg-orange-600 rounded-full flex justify-center items-center absolute bottom-10 right-10 text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+    </button>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById("message").addEventListener("click", popup);
+
+        function popup() {
+            Swal.fire({
+                position: 'bottom-end',
+                title: 'Let us know what\'s up!',
+                input: 'textarea',
+                showLoaderOnConfirm: true,
+                backdrop: true,
+                preConfirm: (message) => {
+                    post(`//127.0.0.1:37149/api`, {
+                        'company': 'company_name',
+                        'username': 'username',
+                        'email': 'email',
+                        'message': message
+                    })
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        position: 'bottom-end',
+                        icon: 'success',
+                        title: 'Thank You!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+        }
+
+        function post(url, params) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            const data = JSON.stringify(params);
+            console.log(data)
+            xhr.send(data);
+        }
+    </script>
+{% endblock %}

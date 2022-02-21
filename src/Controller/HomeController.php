@@ -35,12 +35,20 @@ class HomeController extends AbstractController
     {
         $messages = $repository->findMessagesByCompany($company);
         if (empty($messages)) {
-            throw new \InvalidArgumentException(sprintf('Company `%s` does not have any messages or the company does not exists.', $company));
+            $this->addFlash('notice', sprintf('Company `%s` does not have any messages or the company does not exists.', $company));
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('home/company.html.twig', [
             'companyName' => $messages[0]->getCompany(),
             'messages' => $messages,
         ]);
+    }
+
+    #[Route('/embed', name: 'embed')]
+    public function embed(): Response
+    {
+        return $this->render('embed/popup.html.twig');
     }
 }

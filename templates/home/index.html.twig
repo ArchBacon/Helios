@@ -3,7 +3,18 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-    <div class="flex flex-wrap gap-8">
+    <div class="fixed top-0 right-0 h-12 bg-zinc-600 w-full shadow-lg flex items-center px-12">
+        <a href="{{ path('embed') }}" class="ml-1 text-sm font-medium hover:text-green-600 md:ml-2 text-zinc-800">&#60;Generate embed&#47;&#62;</a>
+    </div>
+
+    <div class="flex flex-wrap gap-8 mt-12">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% for company in companies %}
             <a href="{{ path('company', {'company': company.company }) }}">
                 <div class="bg-zinc-900 h-32 w-52 rounded-lg shadow-lg flex justify-center items-center text-2xl p-4 relative">

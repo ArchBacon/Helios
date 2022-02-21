@@ -10,7 +10,7 @@
         "tailwindcss": "^3.0.23",
         "webpack-notifier": "^1.6.0"
     },
-    "license": "UNLICENSED",
+    "license": "MIT",
     "private": true,
     "scripts": {
         "dev-server": "encore dev-server",

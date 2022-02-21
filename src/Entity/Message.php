@@ -32,13 +32,13 @@ class Message
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
-    public function __construct(string $company, string $username, string $email, string $message)
+    public function __construct(string $company, string $username, string $email, string $message, ?DateTimeImmutable $createdAt)
     {
         $this->company = $company;
         $this->username = $username;
         $this->email = $email;
         $this->message = $message;
-        $this->createdAt = new DateTimeImmutable();
+        $this->createdAt = $createdAt ?? new DateTimeImmutable();
     }
 
     public function getId(): ?int

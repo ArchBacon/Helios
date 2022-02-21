@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="fixed top-0 right-0 h-12 bg-zinc-600 w-full shadow-lg flex items-center px-12">
+        {% include 'shared/breadcrumb.html.twig' with {
+            'company_name': companyName,
+        } only %}
+    </div>
+
+    <div class="flex flex-col mt-10">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden shadow-md sm:rounded-lg">
+                    <table class="table-fixed text-zinc-400">
+                        <thead class="bg-zinc-100 bg-zinc-700">
+                        <tr>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
+                                ID
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
+                                Name
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
+                                Email
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
+                                Message
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
+                                Date
+                            </th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
+
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for message in messages %}
+                            <tr class="border-b odd:bg-zinc-800 even:bg-zinc-700 border-none">
+                                <td class="py-4 px-6 text-sm font-medium">
+                                    {{ message.id }}
+                                </td>
+                                <td class="py-4 px-6 text-sm">
+                                    {{ message.username }}
+                                </td>
+                                <td class="py-4 px-6 text-sm">
+                                    {{ message.email }}
+                                </td>
+                                <td class="py-4 px-6 text-sm break-words">
+                                    {{ message.message }}
+                                </td>
+                                <td class="py-4 px-6 text-sm whitespace-nowrap">
+                                    {{ message.createdAt|date }}
+                                </td>
+                                <td class="py-4 px-6 text-sm whitespace-nowrap">
+                                    <a href="{{ path('message.delete', {'messageId': message.id}) }}" class="hover:text-red-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

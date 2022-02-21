@@ -26,6 +26,7 @@ class MessageRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('m')
             ->select('m.company')
             ->distinct()
+            ->orderBy('m.company', 'ASC')
             ->getQuery()
             ->getResult();
     }
@@ -42,6 +43,16 @@ class MessageRepository extends ServiceEntityRepository
             ->setParameter('company', $company)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function findMessagesByCompany(string $company): array
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.company = :company')
+            ->setParameter('company', $company)
+            ->orderBy('m.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     // /**

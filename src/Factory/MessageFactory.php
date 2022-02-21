@@ -36,6 +36,12 @@ class MessageFactory
             throw new InvalidArgumentException('Property `message` should not be null. string expected');
         }
 
-        return new Message($company, $username, $email, $message);
+        $createdAt = $model->getCreatedAt();
+        if ($createdAt === null)
+        {
+            throw new InvalidArgumentException('Property `message` should not be null. string expected');
+        }
+
+        return new Message($company, $username, $email, $message, $createdAt);
     }
 }

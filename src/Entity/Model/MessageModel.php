@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Entity\Model;
 
+use DateTimeImmutable;
+
 final class MessageModel
 {
     private ?string $company;
     private ?string $username;
     private ?string $email;
     private ?string $message;
+    private ?DateTimeImmutable $createdAt;
 
     public function getCompany(): ?string
     {
@@ -57,5 +60,15 @@ final class MessageModel
         $this->message = $message;
 
         return $this;
+    }
+
+    public function getCreatedAt(): ?DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?DateTimeImmutable $createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 }

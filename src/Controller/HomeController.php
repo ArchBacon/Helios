@@ -11,11 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    private MessageRepository $repository;
-
-    public function __construct(MessageRepository $repository)
+    public function __construct(
+        private MessageRepository $repository
+    )
     {
-        $this->repository = $repository;
     }
 
     #[Route('/', name: 'home')]
@@ -28,6 +27,20 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'companies' => $companies,
+        ]);
+    }
+
+    #[Route('/{company}', name: 'company')]
+    public function view(string $company, MessageRepository $repository): Response
+    {
+        $messages = $repository->findMessagesByCompany($company);
+        if (empty($messages)) {
+            throw new \InvalidArgumentException(sprintf('Company `%s` does not have any messages or the company does not exists.', $company));
+        }
+
+        return $this->render('home/company.html.twig', [
+            'companyName' => $messages[0]->getCompany(),
+            'messages' => $messages,
         ]);
     }
 }

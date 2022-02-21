@@ -26,6 +26,7 @@ class AppFixtures extends Fixture
                 $message->setUsername($faker->name());
                 $message->setEmail($faker->email());
                 $message->setMessage($faker->text());
+                $message->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-5 years')));
 
                 $manager->persist(MessageFactory::create($message));
             }

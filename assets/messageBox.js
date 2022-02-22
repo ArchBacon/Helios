@@ -42,7 +42,7 @@ function openPopup() {
         showLoaderOnConfirm: true,
         backdrop: true,
         preConfirm: (message) => {
-            post(`//127.0.0.1:37149/api`, {
+            post(`//PHP_REPLACE_HOST/api`, {
                 'company': 'company_name',
                 'username': 'username',
                 'email': 'email',
@@ -67,7 +67,6 @@ function post(url, params) {
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     const data = JSON.stringify(params);
-    console.log(data)
     xhr.send(data);
 }
 

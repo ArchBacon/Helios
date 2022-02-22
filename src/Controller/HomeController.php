@@ -15,6 +15,10 @@ class HomeController extends AbstractController
         private MessageRepository $repository
     )
     {
+        $filePath = 'build/messageBox.js';
+        $contents = file_get_contents($filePath);
+        $contents = str_replace('PHP_REPLACE_HOST', $_SERVER['HTTP_HOST'], $contents);
+        file_put_contents($filePath, $contents);
     }
 
     #[Route('/', name: 'home')]

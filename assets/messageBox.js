@@ -47,9 +47,7 @@ function openPopup() {
         backdrop: true,
         preConfirm: (message) => {
             post(`//PHP_REPLACE_HOST/api`, {
-                'company': 'company_name',
-                'username': 'username',
-                'email': 'email',
+                'domain': window.location.host,
                 'message': message
             })
         },

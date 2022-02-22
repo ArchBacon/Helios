@@ -8,21 +8,14 @@
     </div>
 
     <div class="flex flex-wrap gap-8 mt-12">
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="flash-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-        {% for company in companies %}
-            <a href="{{ path('company', {'company': company.company }) }}">
-                <div class="bg-zinc-900 h-32 w-52 rounded-lg shadow-lg flex justify-center items-center text-2xl p-4 relative">
-                    {{ company.company }}
+        {% for domain in domains %}
+            <a href="{{ path('domain', {'domain': domain.domain }) }}">
+                <div class="bg-zinc-900 h-32 w-96 rounded-lg shadow-lg flex justify-center items-center text-2xl p-4 relative">
+                    <p class="break-all">{{ domain.domain }}</p>
 
                     <span class="absolute top-[-5px] right-[-5px] flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-orange-600 rounded-full">
-                    {{ company.messages }}
-                </span>
+                        {{ domain.messages }}
+                    </span>
                 </div>
             </a>
         {% endfor %}

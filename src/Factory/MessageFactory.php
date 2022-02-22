@@ -12,19 +12,9 @@ class MessageFactory
 {
     public static function create(MessageModel $model): Message
     {
-        $company = $model->getCompany();
+        $company = $model->getDomain();
         if ($company === null) {
             throw new InvalidArgumentException('Property `company` should not be null.');
-        }
-
-        $username = $model->getUsername();
-        if ($username === null) {
-            throw new InvalidArgumentException('Property `username` should not be null.');
-        }
-
-        $email = $model->getEmail();
-        if ($email === null) {
-            throw new InvalidArgumentException('Property `email` should not be null.');
         }
 
         $message = $model->getMessage();
@@ -37,13 +27,13 @@ class MessageFactory
             throw new InvalidArgumentException('Property `message` should not be null. string expected');
         }
 
-        return new Message($company, $username, $email, $message, $createdAt);
+        return new Message($company, $message, $createdAt);
     }
 
     public static function fromJson(string $json): Message
     {
         $contents = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
-        return new Message($contents['company'], $contents['username'], $contents['email'], $contents['message'], null);
+        return new Message($contents['domain'], $contents['message'], null);
     }
 }

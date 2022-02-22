@@ -8,44 +8,18 @@ use DateTimeImmutable;
 
 final class MessageModel
 {
-    private ?string $company;
-    private ?string $username;
-    private ?string $email;
+    private ?string $domain;
     private ?string $message;
     private ?DateTimeImmutable $createdAt;
 
-    public function getCompany(): ?string
+    public function getDomain(): ?string
     {
-        return $this->company;
+        return $this->domain;
     }
 
-    public function setCompany(string $company): self
+    public function setDomain(string $domain): self
     {
-        $this->company = $company;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
+        $this->domain = $domain;
 
         return $this;
     }

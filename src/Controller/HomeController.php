@@ -24,28 +24,26 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(): Response
     {
-        $companies = $this->repository->findAllCompanies();
-        foreach ($companies as $key => $value) {
-            $companies[$key]['messages'] = $this->repository->findMessageCount($value['company']);
+        $domains = $this->repository->findAllDomains();
+        foreach ($domains as $key => $value) {
+            $domains[$key]['messages'] = $this->repository->findMessageCount($value['domain']);
         }
 
         return $this->render('home/index.html.twig', [
-            'companies' => $companies,
+            'domains' => $domains,
         ]);
     }
 
-    #[Route('/company/{company}', name: 'company')]
-    public function view(string $company, MessageRepository $repository): Response
+    #[Route('/domain/{domain}', name: 'domain')]
+    public function view(string $domain, MessageRepository $repository): Response
     {
-        $messages = $repository->findMessagesByCompany($company);
+        $messages = $repository->findMessagesByDomain($domain);
         if (empty($messages)) {
-            $this->addFlash('notice', sprintf('Company `%s` does not have any messages or the company does not exists.', $company));
-
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('home/company.html.twig', [
-            'companyName' => $messages[0]->getCompany(),
+        return $this->render('home/domain.html.twig', [
+            'domain' => $messages[0]->getDomain(),
             'messages' => $messages,
         ]);
     }

@@ -18,13 +18,11 @@ class AppFixtures extends Fixture
 
         for ($i = 0; $i < 15; $i++)
         {
-            $company = $faker->company();
+            $group = $faker->domainName();
 
             for ($j = 0; $j < 30; $j++) {
                 $message = new MessageModel();
-                $message->setCompany($company);
-                $message->setUsername($faker->name());
-                $message->setEmail($faker->email());
+                $message->setDomain($group);
                 $message->setMessage($faker->text());
                 $message->setCreatedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-5 years')));
 

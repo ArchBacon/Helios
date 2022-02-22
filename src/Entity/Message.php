@@ -18,13 +18,7 @@ class Message
     private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private string $company;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private string $username;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private string $email;
+    private string $domain;
 
     #[ORM\Column(type: 'text')]
     private string $message;
@@ -32,11 +26,9 @@ class Message
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
-    public function __construct(string $company, string $username, string $email, string $message, ?DateTimeImmutable $createdAt)
+    public function __construct(string $domain, string $message, ?DateTimeImmutable $createdAt)
     {
-        $this->company = $company;
-        $this->username = $username;
-        $this->email = $email;
+        $this->domain = $domain;
         $this->message = $message;
         $this->createdAt = $createdAt ?? new DateTimeImmutable();
     }
@@ -46,38 +38,14 @@ class Message
         return $this->id;
     }
 
-    public function getCompany(): ?string
+    public function getDomain(): ?string
     {
-        return $this->company;
+        return $this->domain;
     }
 
-    public function setCompany(string $company): self
+    public function setDomain(string $domain): self
     {
-        $this->company = $company;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
+        $this->domain = $domain;
 
         return $this;
     }

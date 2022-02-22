@@ -21,12 +21,12 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
-    public function findAllCompanies(): array
+    public function findAllDomains(): array
     {
         return $this->createQueryBuilder('m')
-            ->select('m.company')
+            ->select('m.domain')
             ->distinct()
-            ->orderBy('m.company', 'ASC')
+            ->orderBy('m.domain', 'ASC')
             ->getQuery()
             ->getResult();
     }
@@ -35,21 +35,21 @@ class MessageRepository extends ServiceEntityRepository
      * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\NoResultException
      */
-    public function findMessageCount(string $company): int
+    public function findMessageCount(string $domain): int
     {
         return $this->createQueryBuilder('m')
             ->select('count(m.message)')
-            ->where('m.company = :company')
-            ->setParameter('company', $company)
+            ->where('m.domain = :domain')
+            ->setParameter('domain', $domain)
             ->getQuery()
             ->getSingleScalarResult();
     }
 
-    public function findMessagesByCompany(string $company): array
+    public function findMessagesByDomain(string $domain): array
     {
         return $this->createQueryBuilder('m')
-            ->where('m.company = :company')
-            ->setParameter('company', $company)
+            ->where('m.domain = :domain')
+            ->setParameter('domain', $domain)
             ->orderBy('m.createdAt', 'DESC')
             ->getQuery()
             ->getResult();

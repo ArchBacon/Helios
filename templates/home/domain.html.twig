@@ -5,7 +5,7 @@
 {% block body %}
     <div class="fixed top-0 right-0 h-12 bg-zinc-600 w-full shadow-lg flex items-center px-12">
         {% include 'shared/breadcrumb.html.twig' with {
-            'page_name': companyName,
+            'page_name': domain,
         } only %}
     </div>
 
@@ -18,12 +18,6 @@
                         <tr>
                             <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
                                 ID
-                            </th>
-                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
-                                Name
-                            </th>
-                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
-                                Email
                             </th>
                             <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
                                 Message
@@ -41,12 +35,6 @@
                             <tr class="border-b odd:bg-zinc-800 even:bg-zinc-700 border-none">
                                 <td class="py-4 px-6 text-sm font-medium">
                                     {{ message.id }}
-                                </td>
-                                <td class="py-4 px-6 text-sm">
-                                    {{ message.username }}
-                                </td>
-                                <td class="py-4 px-6 text-sm">
-                                    {{ message.email }}
                                 </td>
                                 <td class="py-4 px-6 text-sm break-words">
                                     {{ message.message }}

@@ -48,6 +48,7 @@ function openPopup() {
         preConfirm: (message) => {
             post(`//PHP_REPLACE_HOST/api`, {
                 'domain': window.location.host,
+                'uri': window.location.pathname + window.location.search,
                 'message': message
             })
         },

@@ -9,6 +9,7 @@ use DateTimeImmutable;
 final class MessageModel
 {
     private ?string $domain;
+    private ?string $uri;
     private ?string $message;
     private ?DateTimeImmutable $createdAt;
 
@@ -22,6 +23,16 @@ final class MessageModel
         $this->domain = $domain;
 
         return $this;
+    }
+
+    public function getUri(): ?string
+    {
+        return $this->uri;
+    }
+
+    public function setUri(?string $uri): void
+    {
+        $this->uri = $uri;
     }
 
     public function getMessage(): ?string

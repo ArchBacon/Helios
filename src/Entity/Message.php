@@ -20,15 +20,19 @@ class Message
     #[ORM\Column(type: 'string', length: 255)]
     private string $domain;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $uri;
+
     #[ORM\Column(type: 'text')]
     private string $message;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private DateTimeImmutable $createdAt;
 
-    public function __construct(string $domain, string $message, ?DateTimeImmutable $createdAt)
+    public function __construct(string $domain, string $uri, string $message, ?DateTimeImmutable $createdAt)
     {
         $this->domain = $domain;
+        $this->uri = $uri;
         $this->message = $message;
         $this->createdAt = $createdAt ?? new DateTimeImmutable();
     }
@@ -48,6 +52,16 @@ class Message
         $this->domain = $domain;
 
         return $this;
+    }
+
+    public function getUri(): string
+    {
+        return $this->uri;
+    }
+
+    public function setUri(string $uri): void
+    {
+        $this->uri = $uri;
     }
 
     public function getMessage(): ?string

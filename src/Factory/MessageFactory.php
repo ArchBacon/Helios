@@ -17,6 +17,11 @@ class MessageFactory
             throw new InvalidArgumentException('Property `company` should not be null.');
         }
 
+        $uri = $model->getUri();
+        if ($uri === null) {
+            throw new InvalidArgumentException('Property `uri` should not be null.');
+        }
+
         $message = $model->getMessage();
         if ($message === null) {
             throw new InvalidArgumentException('Property `message` should not be null. string expected');
@@ -27,13 +32,13 @@ class MessageFactory
             throw new InvalidArgumentException('Property `message` should not be null. string expected');
         }
 
-        return new Message($company, $message, $createdAt);
+        return new Message($company, $uri, $message, $createdAt);
     }
 
     public static function fromJson(string $json): Message
     {
         $contents = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
-        return new Message($contents['domain'], $contents['message'], null);
+        return new Message($contents['domain'], $contents['uri'], $contents['message'], null);
     }
 }

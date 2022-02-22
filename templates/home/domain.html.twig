@@ -17,27 +17,25 @@
                         <thead class="bg-zinc-100 bg-zinc-700">
                         <tr>
                             <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
-                                ID
-                            </th>
-                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
                                 Message
+                            </th><th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
+                                Uri
                             </th>
                             <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
                                 Date
                             </th>
                             <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left uppercase">
-
                             </th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for message in messages %}
-                            <tr class="border-b odd:bg-zinc-800 even:bg-zinc-700 border-none">
-                                <td class="py-4 px-6 text-sm font-medium">
-                                    {{ message.id }}
-                                </td>
-                                <td class="py-4 px-6 text-sm break-words">
+                            <tr class="border-b odd:bg-zinc-800 even:bg-zinc-700 border-none font-medium">
+                                <td class="py-4 px-6 text-sm break-word">
                                     {{ message.message }}
+                                </td>
+                                <td class="py-4 px-6 text-sm">
+                                    {{ message.uri }}
                                 </td>
                                 <td class="py-4 px-6 text-sm whitespace-nowrap">
                                     {{ message.createdAt|date }}
@@ -58,5 +56,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}

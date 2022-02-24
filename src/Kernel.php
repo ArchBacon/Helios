@@ -15,13 +15,9 @@ class Kernel extends BaseKernel
     {
         parent::__construct($environment, $debug);
 
-        $glob = glob('build/messageBox*.js');
-        if ($glob !== false && \array_key_exists(0, $glob)) {
-            $filePath = realpath($glob[0]);
-            $contents = file_get_contents($filePath);
-            $contents = str_replace('PHP_REPLACE_HOST', $_SERVER['HTTP_HOST'], $contents);
-            file_put_contents($filePath, $contents);
-            copy($filePath, 'build/messageBox.js');
-        }
+        $filePath = realpath('extern/helios.js');
+        $contents = file_get_contents($filePath);
+        $contents = str_replace('PHP_REPLACE_HOST', $_SERVER['HTTP_HOST'], $contents);
+        file_put_contents($filePath, $contents);
     }
 }

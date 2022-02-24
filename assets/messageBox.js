@@ -35,10 +35,6 @@ window.onload = function () {
 }
 
 function openPopup() {
-    if (typeof Swal == "undefined") {
-        console.log('sweetalert is missing.');
-    }
-
     Swal.fire({
         position: 'bottom-end',
         title: 'Let us know what\'s up!',
@@ -49,7 +45,8 @@ function openPopup() {
             post(`//PHP_REPLACE_HOST/api`, {
                 'domain': window.location.host,
                 'uri': window.location.pathname + window.location.search,
-                'message': message
+                'message': message,
+                '_token': 'XmOzUXi-4kOLlc6<l=|w(_+ey_fsGy'
             })
         },
     }).then((result) => {

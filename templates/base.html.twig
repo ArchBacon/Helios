@@ -12,7 +12,7 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <script src="https://helios.wip/extern/helios.js"></script>
+            <script src="h{{ asset('extern/helios.js') }}"></script>
         {% endblock %}
     </head>
     <body class="bg-zinc-800 text-zinc-400 p-8">
